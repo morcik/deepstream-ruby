@@ -163,7 +163,7 @@ class Deepstream::Client
 
   def emit(event, value = nil, opts = { timeout: nil })
     result = nil
-    Timeout::timeout(opts[:timeout]) do
+    Timeout.timeout(opts[:timeout]) do
       sleep 1 until (result = _write('E', 'EVT', event, _typed(value)) rescue false) || opts[:timeout].nil?
     end
     result
